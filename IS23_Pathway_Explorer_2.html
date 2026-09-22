@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IS23 Career Pathways — Augusta Tech Cybersecurity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10161d; --panel:#18202b; --panel2:#1f2a38; --line:#2c3a4d;
+  --text:#dbe4ec; --dim:#8a99ab; --faint:#5a6a7d;
+  --amber:#ffb454; --cyan:#57c7d4; --green:#7bd88f; --red:#ff7a76;
+  --amber-dim:rgba(255,180,84,.14); --cyan-dim:rgba(87,199,212,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
+body{background:var(--ink);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:15px;line-height:1.55;
+  background-image:radial-gradient(circle at 20% -10%, rgba(87,199,212,.06), transparent 40%), radial-gradient(circle at 90% 0%, rgba(255,180,84,.05), transparent 35%);}
+.mono{font-family:'IBM Plex Mono',monospace}
+.disp{font-family:'Chakra Petch',sans-serif}
+a{color:var(--cyan)}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header{border-bottom:1px solid var(--line);padding:18px 0 14px;position:sticky;top:0;background:rgba(16,22,29,.92);backdrop-filter:blur(8px);z-index:50}
+.hd{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hd .prog{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--amber);text-transform:uppercase}
+.hd h1{font-family:'Chakra Petch',sans-serif;font-size:19px;font-weight:600;letter-spacing:.02em}
+.hd .loc{font-size:12px;color:var(--faint);margin-left:auto}
+#backBtn{display:none;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--cyan);padding:4px 10px;border:1px solid var(--line);border-radius:6px}
+#backBtn:hover{border-color:var(--cyan)}
+
+/* ---------- home hero ---------- */
+.hero{padding:44px 0 10px}
+.hero h2{font-family:'Chakra Petch',sans-serif;font-size:clamp(26px,4.5vw,40px);font-weight:700;line-height:1.12;max-width:760px}
+.hero h2 em{font-style:normal;color:var(--amber)}
+.hero p{color:var(--dim);max-width:640px;margin-top:12px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0 8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
+.legend span::before{content:'';display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .lD::before{background:var(--green)} .legend .lP::before{background:var(--cyan)}
+.legend .lI::before{background:var(--faint)} .legend .lG::before{background:var(--red)}
+
+/* ---------- role cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:18px 0 60px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;text-align:left;
+  display:flex;flex-direction:column;gap:10px;transition:border-color .15s, transform .15s}
+.card:hover{border-color:var(--amber);transform:translateY(-2px)}
+.card .top{display:flex;align-items:flex-start;gap:12px}
+.billet{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:22px;color:var(--amber);
+  border:1.5px solid var(--amber);border-radius:6px;padding:2px 9px;letter-spacing:.04em;background:var(--amber-dim);flex-shrink:0}
+.card h3{font-family:'Chakra Petch',sans-serif;font-size:16.5px;font-weight:600;line-height:1.25}
+.card .alias{font-size:12.5px;color:var(--dim);line-height:1.45}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--dim)}
+.tag.flag{color:var(--amber);border-color:var(--amber)}
+.tag.cond{color:var(--red);border-color:var(--red)}
+.tag.feed{color:var(--cyan);border-color:var(--cyan)}
+.covrow{margin-top:auto}
+.covrow .nums{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:5px}
+.covrow .nums b{color:var(--text);font-weight:600}
+.bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--panel2)}
+.bar i{display:block;height:100%}
+.bD{background:var(--green)} .bP{background:var(--cyan)} .bI{background:var(--faint)} .bG{background:var(--red)}
+
+/* ---------- detail ---------- */
+#detail{display:none;padding-bottom:80px}
+.dhead{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.dhead .row1{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.billet.big{font-size:34px;padding:4px 16px}
+.dhead h2{font-family:'Chakra Petch',sans-serif;font-size:clamp(22px,3.4vw,30px);font-weight:700}
+.dhead .alias{color:var(--dim);margin-top:8px;max-width:820px}
+.dhead .blurb{margin-top:10px;max-width:820px;color:var(--text)}
+.statstrip{display:flex;gap:0;margin-top:18px;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.stat{flex:1;min-width:110px;padding:12px 14px;background:var(--panel);border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat .v{font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700}
+.stat .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.stat.vD .v{color:var(--green)} .stat.vP .v{color:var(--cyan)} .stat.vI .v{color:var(--dim)} .stat.vG .v{color:var(--red)} .stat.vPct .v{color:var(--amber)}
+.caution{margin-top:12px;border:1px solid var(--red);background:rgba(255,122,118,.08);border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--text)}
+.caution b{color:var(--red)}
+
+/* ---------- YOU ARE HERE rail ---------- */
+.railsec{padding:26px 0 6px}
+.railsec .ask{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.rail{display:flex;align-items:flex-start;position:relative;gap:0;overflow-x:auto;padding-bottom:6px}
+.rail::before{content:'';position:absolute;top:17px;left:24px;right:24px;height:2px;background:var(--line)}
+.rstop{flex:1;min-width:96px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;padding-top:2px}
+.rdot{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:var(--panel);position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:13px;color:var(--dim);transition:all .15s}
+.rstop:hover .rdot{border-color:var(--cyan);color:var(--cyan)}
+.rstop.done .rdot{border-color:var(--green);color:var(--green);background:rgba(123,216,143,.1)}
+.rstop.here .rdot{border-color:var(--amber);color:var(--ink);background:var(--amber);box-shadow:0 0 0 5px var(--amber-dim)}
+.rlab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--dim);text-align:center;line-height:1.3}
+.rstop.here .rlab{color:var(--amber)}
+.youare{font-family:'Chakra Petch',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--amber);height:14px}
+
+/* ---------- semester blocks ---------- */
+.sem{border:1px solid var(--line);border-radius:12px;margin:16px 0;background:var(--panel);overflow:hidden}
+.sem.past{opacity:.62}
+.sem.current{border-color:var(--amber)}
+.semhd{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.semhd .n{font-family:'Chakra Petch',sans-serif;font-weight:700;color:var(--amber);font-size:15px}
+.semhd .t{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px}
+.semhd .now{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink);background:var(--amber);padding:2px 8px;border-radius:4px;font-weight:600}
+.unlocks{padding:12px 18px 6px}
+.unlock{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(44,58,77,.6);font-size:13.5px}
+.unlock:last-child{border-bottom:none}
+.unlock .c{font-family:'IBM Plex Mono',monospace;color:var(--cyan);font-size:12.5px;padding-top:1px}
+.unlock .u{color:var(--text)}
+.unlock .u .ksa{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)}
+.outc-tog{margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;padding:2px 0;background:none;border:none;cursor:pointer}
+.outc-tog:hover{color:var(--amber)}
+.outc-tog .car{transition:transform .15s;display:inline-block}
+.outc-tog.open .car{transform:rotate(90deg)}
+.outc-list{margin:6px 0 2px;padding:8px 10px;border-left:2px solid var(--line);background:rgba(31,42,56,.5);border-radius:0 8px 8px 0;display:grid;gap:5px}
+.outc{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:12.5px;line-height:1.4}
+.outc .rt{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:11px;text-align:center;border-radius:3px;height:17px;line-height:17px}
+.rt.rD{color:var(--green);background:rgba(123,216,143,.14)}
+.rt.rP{color:var(--cyan);background:rgba(87,199,212,.14)}
+.rt.rI{color:var(--dim);background:rgba(90,106,125,.18)}
+.outc .ot{color:var(--text)}
+.outc .ot .oid{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-left:5px}
+.milest{margin:8px 18px 16px;border:1px dashed var(--amber);border-radius:10px;padding:12px 14px;background:var(--amber-dim)}
+.milest .mh{display:flex;gap:8px;align-items:center;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:13.5px;color:var(--amber);letter-spacing:.03em;margin-bottom:8px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:4px 0;font-size:13.5px;cursor:pointer}
+.check input{margin-top:3px;accent-color:var(--amber);width:15px;height:15px;flex-shrink:0}
+.check.donetxt span{color:var(--faint);text-decoration:line-through}
+
+/* ---------- sections ---------- */
+.sect{margin-top:34px}
+.sect>h3{font-family:'Chakra Petch',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);
+  display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sect>h3::after{content:'';flex:1;height:1px;background:var(--line)}
+.gaps{display:grid;gap:8px}
+.gap{display:grid;grid-template-columns:minmax(140px,1fr) 2fr;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px}
+.gap .g{color:var(--red);font-weight:500}
+.gap .f{color:var(--dim)}
+.gap .f b{color:var(--text);font-weight:500}
+.port{display:grid;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.leads{display:flex;gap:8px;flex-wrap:wrap}
+.lead{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--panel);font-size:13px;transition:border-color .15s}
+.lead:hover{border-color:var(--cyan)}
+.lead .bc{font-family:'Chakra Petch',sans-serif;font-weight:700;color:var(--cyan);font-size:14px}
+.foot{margin-top:44px;border-top:1px solid var(--line);padding:16px 0 40px;font-size:12px;color:var(--faint)}
+.savenote{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);margin-top:6px}
+@media(max-width:640px){
+  .unlock{grid-template-columns:1fr;gap:2px}
+  .gap{grid-template-columns:1fr;gap:4px}
+  .stat{min-width:33%}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap hd">
+  <span class="prog">IS23 · Cybersecurity AAS</span>
+  <h1>Career Pathway Explorer</h1>
+  <button id="backBtn" onclick="goHome()">← All pathways</button>
+  <span class="loc">Augusta Technical College · Georgia Cyber Center</span>
+</div></header>
+
+<main id="home"><div class="wrap">
+  <div class="hero">
+    <h2>Pick the job. <em>See exactly how your courses get you there.</em></h2>
+    <p>Every pathway below maps a real entry-level job — coded to the DoW Cyber Workforce Framework — against the knowledge, skills, and abilities you build in each IS23 course. Choose a target, mark where you are, and check off milestones as you go. Under each course, open <span style="color:var(--cyan);font-family:'IBM Plex Mono',monospace;font-size:13px">mapped learning outcomes</span> to see exactly which course objectives count toward that job.</p>
+    <div class="legend">
+      <span class="lD">Demonstrated in coursework</span><span class="lP">Practiced in labs</span>
+      <span class="lI">Introduced</span><span class="lG">Gap — closed by extracurriculars</span>
+    </div>
+  </div>
+  <div class="grid" id="cardGrid"></div>
+</div></main>
+
+<main id="detail"><div class="wrap" id="detailBody"></div></main>
+
+<script>
+/* ============ DATA (derived from IS23_Career_Pathways_Mapping_DB.xlsx v2.0) ============ */
+const S_NAMES = ["Sem 1","Sem 2","Sem 3","Sem 4","Sem 5"];
+const OUTSTMT = {"1001-3.4":"Describe different types of storage media including magnetic, optical, and solid state.","1001-5.1":"Describe wired technologies in LAN.","1001-5.4":"Discuss devices and methods of providing security within the networked world.","1001-6.2":"Identify the legal obligations of IT personnel.","2451-11.1":"Calculate an IPv4 subnetting scheme to efficiently segment a network.","2451-13.2":"Use ping and traceroute utilities to test network connectivity.","2451-16.4":"Configure network devices with device hardening features to mitigate security threats.","2451-1.5":"Compare the characteristics of common types of networks.","2451-15.4":"Explain how web and email protocols operate.","2451-15.5":"Explain how DNS and DHCP operate.","2451-16.1":"Explain why basic security measures are necessary on network devices.","2451-3.7":"Explain how data encapsulation allows data to be transported across the network.","2451-8.5":"Explain how network devices use routing tables to direct packets to a destination network.","1601-1.1":"Define key terms in information security terminology.","1601-2.1":"State the components and characteristics of an information system.","1601-2.2":"Identify threats to an information system.","1601-2.3":"Identify types of attacks to an information system.","1601-3.1":"List laws relevant to information security.","1601-3.2":"List ethical and professional issues relevant to information security.","1601-6.3":"Identify major security models.","2602-1.3":"Demonstrate an understanding of and be able to identify both internal and external threats.","2602-6.1":"Demonstrate an understanding of how encryption algorithms are used in modern cryptography.","2602-1.1":"Define network security.","2602-1.2":"Identify, define and describe the relevance of security goals (integrity, confidentiality, availability).","2602-2.1":"List the major types of malicious code and identify appropriate countermeasures.","1602-1.4":"Identify threats, their probability and cost.","1602-2.1":"List security concerns with hardware, software, data, and people.","1602-3.4":"List types of security standards and procedures that are used to configure or maintain a system (such as access control lists and configuration rules).","1602-3.5":"Discuss items included in: Incident Reporting Plan, Disaster Recovery Plan and a Business Continence Plan.","1122-6.2":"Demonstrate appropriate use of communication skills and professionalism in the workplace.","2411-1.2":"Perform a clean installation.","2411-3.2":"Perform Configure Windows Defender/malware protection.","2411-3.4":"Perform Configure security settings in the Windows Firewall.","2431-3.3":"Compose the appropriate command to change a password.","2431-5.3":"Use the \"vi\" editor to create, delete, copy, move text within files.","2431-8.2":"Use commands to create, delete, rename, copy, sort, secure, move, cut, paste, link, diff files and directories.","2431-8.3":"Use redirection operators, wildcards, command substitution and the pipe symbol.","2431-1.4":"Describe the UNIX/Linux environment.","2431-4.1":"Describe the file system hierarchy.","2601-4.1":"Design and install a secure network on at least two common server platforms.","2601-1.2":"Demonstrate an understanding of and apply the concepts and use of software workstation security including logins, passwords and antivirus.","2613-3.4":"Perform automated security tasks using shell scripts.","2613-1.1":"Understand the different types of malicious software and what damage they can do.","2613-2.4":"Identify the types of social engineering.","2613-8.2":"Describe symmetric and asymmetric encryption algorithms.","2612-5.1":"Retrieve and interpret evidence from mail messages.","2612-5.3":"Retrieve and interpret evidence from file signatures.","2612-2.3":"Demonstrate tools used in evidence collection.","2612-3.3":"Demonstrate tools used in evidence analysis.","2612-4.2":"Demonstrate proper crime/incident scene processing.","2612-1.2":"Discuss the computer investigation process.","2612-1.3":"List current forensic tools and their purpose.","2612-2.1":"Discuss legal methods of evidence collection.","2612-2.2":"List methods of evidence collection.","2612-3.1":"Discuss legal methods of evidence analysis.","2612-4.1":"List considerations in crime/incident scene processing.","2742-2.2":"Write program output to screen.","2742-5.2":"Write program using Python lists.","2742-8.1":"Write program to search document and/or file for specific terms and print findings.","2742-1.5":"Use conditional statements.","2742-1.1":"Describe basic Python concepts.","2614-2.2":"Perform Windows Configuration.","2614-2.5":"Perform Linux Configuration.","2614-5.3":"Perform Encrypting and Decrypting Data.","2614-7.6":"Perform Network Logging.","2614-9.6":"Perform Incident Response Handling.","2614-3.4":"Understand Network Services.","2614-4.1":"Understand Network Threats and Attacks.","2614-4.2":"Identify Hacking Tools.","2614-5.4":"Describe Hashing Methods.","2614-6.1":"Describe Antimalware.","2614-8.6":"Understand Digital Forensics.","2614-9.1":"Describe the Cyber Kill Chain.","2614-9.2":"Describe the Diamond Model of Intrusion Analysis.","2614-9.4":"Describe Computer Security Incident Response Team (CSIRT)","1001-2.4":"Identify components of the motherboard including registers, adapter cards, buses, and ports.","1001-2.5":"Identify common input and output devices.","2451-10.1":"Configure initial settings on a Cisco IOS router.","2451-2.1":"Implement initial settings including passwords, IP addressing, and default gateway parameters on a network switch and end devices.","2451-4.7":"Connect devices using wired and wireless media.","2451-1.1":"Explain the advances in modern network technologies.","2451-1.6":"Explain how LANs and WANs interconnect to the internet.","2451-17.1":"Identify the devices used in a small network.","2451-4.1":"Explain how physical layer protocols, services, and network media support communications across data networks.","2451-4.4":"Identify the basic characteristics of copper cabling.","2602-3.1":"Recognize and understand the administration of securing the following technologies: remote access, email, web, directory, file transfer and wireless.","1122-1.2":"Implement, install, configure, optimize and upgrade hardware components.","1122-3.2":"Implement install, configure, optimize and upgrade operating systems.","1122-2.2":"Perform preventive maintenance of hardware components and operating systems.","1122-1.1":"Identify hardware components and features including storage devices, motherboard components, power supplies, processors, cooling devices, memory, display devices, peripherals, adapter cards, laptop components and printer components.","1122-2.1":"Explain and interpret common hardware and operating system troubleshooting scenarios and solutions.","2411-4.3":"Perform Configure remote access.","2411-6.1":"Perform Troubleshoot performance issues.","2411-6.2":"Perform Troubleshoot reliability issues by using built-in diagnostic tools.","2411-6.3":"Perform Configure Windows Update.","2431-7.2":"Edit and manage system log files.","2601-2.3":"Demonstrate an understanding of and apply file, directory, share and account security on servers.","2452-16.1":"Troubleshoot static and default route configurations.","2452-4.1":"Troubleshoot inter-VLAN routing on Layer 3 devices.","2452-4.5":"Troubleshoot common inter-VLAN configuration issues.","2452-1.2":"Configure initial settings on a Cisco switch.","2452-3.1":"Implement VLANs and trunking in a switched network.","2452-4.3":"Configure router-on-a-stick inter-VLAN routing.","2452-2.1":"Explain how Layer 2 switches forward data.","2611-6.1":"Define and describe remote access service.","2614-7.4":"Understand Network Logging.","2614-8.5":"Describe Event Handling.","1602-5.1":"Prepare a general security policy for a business that supports the mission, vision, direction of the business and sets the tone of security efforts within the organization.","1602-3.3":"List types of security policies that are issue specific and distributed to users (such as passwords, e-mail, and acceptable/remote use).","2411-3.1":"Perform Configure and troubleshoot User Account Control.","2614-1.1":"Understand the reasons for a SOC.","2614-1.2":"Describe the Elements of a SOC.","1601-6.1":"State the steps in risk identification and assessment.","1601-6.2":"Identify risk control strategies.","1602-1.1":"Define risk assessment and risk management.","2602-2.3":"Demonstrate an understanding of the concept and significance of auditing, logging and system scanning.","2602-5.1":"Explain intrusion detection.","2602-5.2":"Define the difference between host and network based detection.","2601-3.2":"Demonstrate an understanding of software infrastructure security including hardwire firewalls and proxy services.","2611-7.3":"Demonstrate an understanding of the difference between passive and active detection.","2611-7.4":"Demonstrate tools used in intrusion detection and prevention.","2611-7.1":"Explain intrusion detection and prevention.","2613-5.1":"Describe the vulnerabilities of Windows and Linux operating systems.","2613-6.2":"Explain Web application vulnerabilities.","2614-8.4":"Perform Configuring IPS and Firewall Rules.","2614-4.3":"Describe Network Monitoring Tools.","2614-6.4":"Identify Vulnerability Information Sources.","2614-7.1":"Explain Why to Monitor IP Protocols.","2614-7.3":"Understand End Device Logging.","2614-7.5":"Identify End Device and Network Logging Tools.","2614-8.1":"Identify Detection Tools.","2614-8.3":"Understand Rules and Alerts.","2602-4.3":"Identify key elements of VPN (Virtual Private Network) and RAS (Row Access Strobe) technology for secure connectivity.","2602-5.4":"Identify some characteristics of an intrusion detection system.","2602-6.3":"Discuss PKI.","2601-3.3":"Demonstrate an understanding of basic web security, VPN's and e-mail security.","2452-1.1":"Configure devices by using security best practices.","2611-1.2":"Demonstrate an understanding of the different types of firewall protection.","2611-2.4":"Demonstrate an understanding of and configure a packet-filtering architecture.","2611-3.3":"Demonstrate an understanding of and configure application-layer firewalls.","2611-5.2":"Demonstrate an understanding of and configure data filtering, traffic control and user authentication.","2611-6.3":"Demonstrate an understanding of TACACS+ and RADIUS (Remote Authentication Dial-In User Service).","2611-3.4":"Explain using perimeter network security (DMZ) for outgoing services.","2611-6.2":"Describe a VPN (Virtual Private Network).","2613-5.3":"Describe the techniques to harden OS systems.","2614-5.5":"Understand PKI (Public Key Infrastructure)","1602-3.1":"Discuss at least one published security model (such as ISO, VISA or NIST).","1602-4.2":"Discuss security management model (such as ISO network management model or security systems development life cycle).","1602-4.3":"Discuss issues involving compliance and enforcement.","2411-6.4":"Perform Configure data protection.","2601-2.2":"Demonstrate an understanding of and apply the software security components of servers including firewalls, decryption, and authentication.","2613-3.3":"Perform ping sweeps.","2613-5.2":"Perform vulnerability patching.","2613-6.3":"Perform Web server attack using security tools.","2613-3.1":"Describe port scanning and types of port scanning.","2613-3.2":"Describe port scanning tools.","2613-2.2":"Conduct competitive intelligence.","1601-3.3":"Identify international laws and legal bodies.","1602-2.2":"List security issues with physical security, personnel, operating systems, communications, access, documentation and systems/software development.","1001-4.4":"Discuss the different types of application software including business software, productivity tools, and utility tools.","2742-2.3":"Write program output to a file.","2742-7.2":"Write program to edit user described data.","2742-5.3":"Use data collection techniques."};
+const OUTMAP = {"212":{"CIST 1001":[["1001-3.4","I","K0117"],["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-13.2","P","S0041"],["2451-16.4","P","K0001"],["2451-1.5","I","K0001"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-3.7","I","K0061"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.3","I","K0004"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-2.1","I","JL-24"]],"CIST 1602":[["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.4","I","JL-16"],["1602-3.5","I","K0041"]],"CIST 1122":[["1122-6.2","P","JL-01,JL-15,JL-38"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"],["2431-4.1","I","K0117"]],"CIST 2601":[["2601-4.1","D","S0067"],["2601-1.2","P","S0067"]],"CIST 2613":[["2613-3.4","D","JL-13,S0060"],["2613-1.1","I","K0110"],["2613-2.4","I","K0110"],["2613-8.2","I","K0018"]],"CIST 2612":[["2612-5.1","D","S0071"],["2612-5.3","D","K0117,S0071"],["2612-2.3","P","JL-10,JL-36,S0047"],["2612-3.3","P","JL-26,S0071"],["2612-4.2","P","JL-10,K0118,S0047"],["2612-1.2","I","K0042"],["2612-1.3","I","S0071"],["2612-2.1","I","JL-16,JL-38,K0118"],["2612-2.2","I","JL-36"],["2612-3.1","I","JL-38"],["2612-4.1","I","K0118"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-7.6","P","S0041,S0156"],["2614-9.6","P","K0042"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-4.2","I","K0110"],["2614-5.4","I","JL-36"],["2614-6.1","I","JL-24"],["2614-8.6","I","JL-26,K0042"],["2614-9.1","I","K0177"],["2614-9.2","I","K0177"],["2614-9.4","I","K0041"]]},"441":{"CIST 1001":[["1001-2.4","I","K0109"],["1001-2.5","I","K0109"],["1001-5.1","I","K0001"],["1001-5.4","I","K0001"]],"CIST 2451":[["2451-10.1","P","JL-05"],["2451-11.1","P","K0061"],["2451-13.2","P","S0041"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-4.7","P","JL-30"],["2451-1.1","I","JL-29"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-4.4","I","JL-30"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-6.3","I","K0004"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-3.1","P","K0247"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"]],"CIST 1602":[["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.4","I","JL-16"]],"CIST 1122":[["1122-1.2","D","JL-30,K0109"],["1122-3.2","D","K0294"],["1122-2.2","P","K0294"],["1122-6.2","P","JL-01,JL-15"],["1122-1.1","I","K0109"],["1122-2.1","I","K0294,S0039"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-4.3","P","K0247"],["2411-6.1","P","K0294,S0039"],["2411-6.2","P","S0039"],["2411-6.3","P","K0088"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-7.2","P","JL-28"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-2.3","P","K0088"]],"CIST 2452":[["2452-16.1","D","S0039"],["2452-4.1","D","JL-27"],["2452-4.5","D","JL-27"],["2452-1.2","P","JL-05"],["2452-3.1","P","JL-27"],["2452-4.3","P","JL-27"],["2452-2.1","I","JL-29"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2611":[["2611-6.1","I","K0247"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-7.6","P","S0041"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-7.4","I","JL-28"],["2614-8.5","I","K0317"]]},"411":{"CIST 1001":[["1001-2.4","I","K0109"],["1001-2.5","I","K0109"],["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.3","I","K0004"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-3.1","P","K0247"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"]],"CIST 1602":[["1602-5.1","D","JL-11"],["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.3","I","JL-11,K0158"],["1602-3.4","I","JL-16"]],"CIST 1122":[["1122-1.2","D","K0109"],["1122-3.2","D","JL-04,K0294"],["1122-2.2","P","K0294"],["1122-6.2","P","JL-01,JL-15"],["1122-1.1","I","JL-18,K0109"],["1122-2.1","I","K0294,S0039"]],"CIST 2411":[["2411-1.2","P","JL-04,JL-18,K0060"],["2411-3.1","P","K0158"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"],["2411-4.3","P","K0247"],["2411-6.1","P","K0294,S0039"],["2411-6.2","P","S0039"],["2411-6.3","P","JL-04,K0088"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","S0067"],["2601-1.2","P","K0158,S0067"],["2601-2.3","P","JL-03,K0088"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2611":[["2611-6.1","I","K0247"]],"CIST 2452":[["2452-16.1","D","S0039"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-1.1","I","JL-07"],["2614-1.2","I","JL-07"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-8.5","I","JL-07,K0317"]]},"531":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-13.2","P","S0041"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005,K0106"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.1","I","K0002"],["1601-6.2","I","K0002"],["1601-6.3","I","K0004"]],"CIST 1602":[["1602-1.1","I","K0002"],["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.4","I","JL-16"],["1602-3.5","I","JL-25,K0041"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-2.3","P","A0128"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-2.1","I","JL-24,K0106"],["2602-5.1","I","K0046"],["2602-5.2","I","K0046"]],"CIST 1122":[["1122-6.2","P","JL-01,JL-15"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"],["2411-6.3","P","K0088"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","S0067"],["2601-1.2","P","S0067"],["2601-2.3","P","K0088"],["2601-3.2","P","K0013"]],"CIST 2611":[["2611-7.3","P","K0046"],["2611-7.4","P","K0013,S0025"],["2611-7.1","I","K0046"]],"CIST 2613":[["2613-3.4","D","JL-13,S0060"],["2613-1.1","I","K0110"],["2613-2.4","I","K0110"],["2613-5.1","I","K0070"],["2613-6.2","I","K0070"],["2613-8.2","I","K0018"]],"CIST 2612":[["2612-5.1","D","S0071"],["2612-5.3","D","S0071"],["2612-2.3","P","JL-10,S0047"],["2612-3.3","P","JL-26,S0071"],["2612-4.2","P","JL-10,K0118,S0047"],["2612-1.2","I","K0042"],["2612-1.3","I","S0071"],["2612-2.1","I","JL-16,K0118"],["2612-4.1","I","K0118"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-7.6","P","JL-06,S0041,S0156"],["2614-8.4","P","A0128,S0025"],["2614-9.6","P","JL-25,K0042"],["2614-1.1","I","JL-07"],["2614-1.2","I","JL-07"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-4.2","I","K0110"],["2614-4.3","I","K0013"],["2614-6.1","I","JL-24"],["2614-6.4","I","K0070"],["2614-7.1","I","K0058"],["2614-7.3","I","JL-06"],["2614-7.4","I","K0058"],["2614-7.5","I","JL-06"],["2614-8.1","I","K0013"],["2614-8.3","I","JL-06"],["2614-8.5","I","JL-07"],["2614-8.6","I","JL-26,K0042"],["2614-9.1","I","K0177"],["2614-9.2","I","K0177"],["2614-9.4","I","K0041"]]},"521":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"]],"CIST 2451":[["2451-10.1","P","JL-05"],["2451-11.1","P","K0061"],["2451-13.2","P","S0041"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-6.3","I","K0004"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-2.3","P","A0128"],["2602-3.1","P","K0247"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-4.3","I","JL-35"],["2602-5.1","I","K0046"],["2602-5.2","I","K0046"],["2602-5.4","I","JL-34"],["2602-6.3","I","K0019"]],"CIST 1602":[["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.4","I","JL-16"]],"CIST 1122":[["1122-3.2","D","K0294"],["1122-2.2","P","K0294"],["1122-6.2","P","JL-01,JL-15"],["1122-2.1","I","K0294,S0039"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"],["2411-4.3","P","K0247"],["2411-6.1","P","K0294,S0039"],["2411-6.2","P","S0039"],["2411-6.3","P","K0088"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-7.2","P","JL-28"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","S0067"],["2601-1.2","P","S0067"],["2601-2.3","P","K0088"],["2601-3.2","P","K0013"],["2601-3.3","P","JL-35"]],"CIST 2452":[["2452-16.1","D","S0039"],["2452-4.1","D","JL-27"],["2452-4.5","D","JL-27"],["2452-1.1","P","JL-09"],["2452-1.2","P","JL-05"],["2452-3.1","P","JL-27"],["2452-4.3","P","JL-27"]],"CIST 2611":[["2611-1.2","P","JL-33"],["2611-2.4","P","JL-33"],["2611-3.3","P","JL-33"],["2611-5.2","P","JL-33"],["2611-6.3","P","JL-35"],["2611-7.3","P","K0046"],["2611-7.4","P","JL-34,K0013,S0025"],["2611-3.4","I","JL-33"],["2611-6.1","I","K0247"],["2611-6.2","I","JL-35"],["2611-7.1","I","K0046"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2613":[["2613-3.4","D","JL-13,S0060"],["2613-5.3","I","JL-09"],["2613-8.2","I","K0018"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-7.6","P","JL-06,S0041"],["2614-8.4","P","A0128,JL-34,S0025"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-4.3","I","K0013"],["2614-5.5","I","K0019"],["2614-7.3","I","JL-06"],["2614-7.4","I","JL-28"],["2614-7.5","I","JL-06"],["2614-8.1","I","K0013"],["2614-8.3","I","JL-06"]]},"461":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.1","I","K0002"],["1601-6.2","I","K0002"],["1601-6.3","I","K0004"]],"CIST 1602":[["1602-5.1","D","JL-11"],["1602-1.1","I","K0002"],["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.1","I","K0048"],["1602-3.3","I","JL-11,K0158"],["1602-3.4","I","JL-16"],["1602-4.2","I","K0048"],["1602-4.3","I","K0054"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-2.3","P","JL-08,K0054"],["2602-3.1","P","K0247"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-5.1","I","K0046"],["2602-5.2","I","K0046"],["2602-6.3","I","K0019"]],"CIST 1122":[["1122-3.2","D","JL-04,K0294"],["1122-2.2","P","K0294"],["1122-6.2","P","JL-01,JL-15"],["1122-2.1","I","K0294,S0039"]],"CIST 2411":[["2411-1.2","P","JL-04,K0060"],["2411-3.1","P","K0158"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"],["2411-4.3","P","K0247"],["2411-6.1","P","K0294,S0039"],["2411-6.2","P","S0039"],["2411-6.3","P","JL-04,K0088"],["2411-6.4","P","JL-31"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","JL-31,S0067"],["2601-1.2","P","K0158,S0067"],["2601-2.2","P","JL-31"],["2601-2.3","P","JL-03,JL-31,K0088"],["2601-3.2","P","K0013"]],"CIST 2611":[["2611-7.3","P","K0046"],["2611-7.4","P","K0013"],["2611-6.1","I","K0247"],["2611-7.1","I","K0046"]],"CIST 2613":[["2613-3.3","D","S0001"],["2613-3.4","D","JL-13,S0060"],["2613-5.2","D","S0001"],["2613-6.3","D","S0001"],["2613-3.1","I","JL-08"],["2613-3.2","I","JL-08"],["2613-5.1","I","K0070"],["2613-5.3","I","JL-09"],["2613-6.2","I","K0070"],["2613-8.2","I","K0018"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2452":[["2452-16.1","D","S0039"],["2452-1.1","P","JL-09"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-4.3","I","K0013"],["2614-5.5","I","K0019"],["2614-6.4","I","K0070"],["2614-8.1","I","K0013"]]},"541":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-13.2","P","S0041"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005,K0106"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.1","I","K0002"],["1601-6.2","I","K0002"],["1601-6.3","I","K0004"]],"CIST 1602":[["1602-5.1","D","JL-11"],["1602-1.1","I","K0002"],["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.1","I","K0048"],["1602-3.3","I","JL-11"],["1602-3.4","I","JL-16"],["1602-4.2","I","K0048"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-2.3","P","JL-08"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-2.1","I","K0106"]],"CIST 1122":[["1122-6.2","P","JL-01,JL-15"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","S0067"],["2601-1.2","P","S0067"],["2601-3.2","P","K0013"]],"CIST 2611":[["2611-7.4","P","K0013"]],"CIST 2613":[["2613-3.3","D","S0001"],["2613-3.4","D","JL-13,S0060"],["2613-5.2","D","JL-19,S0001"],["2613-6.3","D","S0001,S0137"],["2613-2.2","P","JL-20"],["2613-1.1","I","K0110"],["2613-2.4","I","K0110"],["2613-3.1","I","JL-08"],["2613-3.2","I","JL-08"],["2613-5.1","I","K0070"],["2613-5.3","I","JL-09"],["2613-6.2","I","K0070,S0137"],["2613-8.2","I","K0018"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2452":[["2452-1.1","P","JL-09"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-7.6","P","S0041"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-4.2","I","K0110"],["2614-4.3","I","K0013"],["2614-6.4","I","JL-20,K0070"],["2614-8.1","I","K0013"]]},"612":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-16.4","P","K0001"],["2451-1.5","I","K0001"],["2451-16.1","I","K0001"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-3.1","I","K0003,K0168"],["1601-3.2","I","K0003"],["1601-3.3","I","K0168"],["1601-6.1","I","K0002"],["1601-6.2","I","K0002"],["1601-6.3","I","K0004"]],"CIST 1602":[["1602-5.1","D","JL-11,JL-22"],["1602-1.1","I","K0002"],["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-2.2","I","JL-21"],["1602-3.1","I","K0037,K0048"],["1602-3.3","I","JL-11,K0158"],["1602-3.4","I","JL-16,JL-21"],["1602-3.5","I","JL-22"],["1602-4.2","I","K0037,K0048"],["1602-4.3","I","JL-23,K0054"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-2.3","P","JL-08,K0054"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"]],"CIST 1122":[["1122-6.2","P","JL-01,JL-15"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-3.1","P","K0158"]],"CIST 2431":[["2431-1.4","I","K0060"]],"CIST 2611":[["2611-7.4","P","K0013"]],"CIST 2613":[["2613-3.3","D","S0001"],["2613-5.2","D","S0001"],["2613-6.3","D","S0001"],["2613-3.1","I","JL-08"],["2613-3.2","I","JL-08"],["2613-5.1","I","K0070"],["2613-5.3","I","JL-09"],["2613-6.2","I","K0070"],["2613-8.2","I","K0018"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2601":[["2601-1.2","P","K0158"],["2601-3.2","P","K0013"]],"CIST 2452":[["2452-1.1","P","JL-09"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-4.1","I","K0005"],["2614-4.3","I","K0013"],["2614-6.4","I","K0070"],["2614-7.5","I","JL-23"],["2614-8.1","I","K0013"]]},"511":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-13.2","P","S0041"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.1","I","K0002"],["1601-6.2","I","K0002"],["1601-6.3","I","K0004"]],"CIST 1602":[["1602-5.1","D","JL-11"],["1602-1.1","I","K0002"],["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.3","I","JL-11"],["1602-3.4","I","JL-16"],["1602-3.5","I","K0041"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-2.3","P","A0128"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-5.1","I","K0046"],["2602-5.2","I","K0046"],["2602-6.3","I","K0019"]],"CIST 1122":[["1122-6.2","P","JL-01,JL-15"]],"CIST 2411":[["2411-1.2","P","K0060"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"],["2411-6.3","P","K0088"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","S0067"],["2601-1.2","P","S0067"],["2601-2.3","P","K0088"],["2601-3.2","P","K0013"]],"CIST 2611":[["2611-7.3","P","K0046"],["2611-7.4","P","K0013,S0025"],["2611-7.1","I","K0046"]],"CIST 2613":[["2613-3.3","D","S0001"],["2613-3.4","D","JL-13,S0060"],["2613-5.2","D","S0001"],["2613-6.3","D","S0001"],["2613-1.1","I","K0110"],["2613-2.4","I","K0110"],["2613-5.1","I","K0070"],["2613-6.2","I","K0070"],["2613-8.2","I","K0018"]],"CIST 2612":[["2612-2.3","P","JL-10"],["2612-4.2","P","JL-10"],["2612-1.2","I","K0042"],["2612-2.1","I","JL-16"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-7.6","P","JL-06,S0041,S0156"],["2614-8.4","P","A0128,S0025"],["2614-9.6","P","K0042"],["2614-1.1","I","JL-07"],["2614-1.2","I","JL-07"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-4.2","I","K0110"],["2614-4.3","I","K0013"],["2614-5.5","I","K0019"],["2614-6.4","I","K0070"],["2614-7.1","I","K0058"],["2614-7.3","I","JL-06"],["2614-7.4","I","K0058"],["2614-7.5","I","JL-06"],["2614-8.1","I","K0013"],["2614-8.3","I","JL-06"],["2614-8.5","I","JL-07"],["2614-8.6","I","K0042"],["2614-9.1","I","K0177"],["2614-9.2","I","K0177"],["2614-9.4","I","K0041"]]},"451":{"CIST 1001":[["1001-5.1","I","K0001"],["1001-5.4","I","K0001"],["1001-6.2","I","K0003"]],"CIST 2451":[["2451-11.1","P","K0061"],["2451-16.4","P","K0001"],["2451-2.1","P","K0011"],["2451-1.5","I","K0001"],["2451-1.6","I","K0010"],["2451-15.4","I","K0034"],["2451-15.5","I","K0034"],["2451-16.1","I","K0001"],["2451-17.1","I","K0011"],["2451-3.7","I","K0061"],["2451-4.1","I","K0010"],["2451-8.5","I","K0061"]],"CIST 1601":[["1601-1.1","I","JL-02"],["1601-2.1","I","K0004"],["1601-2.2","I","K0005"],["1601-2.3","I","K0005"],["1601-3.1","I","K0003"],["1601-3.2","I","K0003"],["1601-6.3","I","K0004"]],"CIST 2602":[["2602-1.3","P","K0005"],["2602-3.1","P","K0247"],["2602-6.1","P","K0018"],["2602-1.1","I","JL-02"],["2602-1.2","I","K0004"],["2602-6.3","I","K0019"]],"CIST 1602":[["1602-1.4","I","K0006"],["1602-2.1","I","K0006"],["1602-3.3","I","K0158"],["1602-3.4","I","JL-16"]],"CIST 1122":[["1122-3.2","D","JL-04,K0294"],["1122-2.2","P","K0294"],["1122-6.2","P","JL-01,JL-15"],["1122-2.1","I","K0294,S0039"]],"CIST 2411":[["2411-1.2","P","JL-04,K0060"],["2411-3.1","P","K0158"],["2411-3.2","P","S0067"],["2411-3.4","P","S0067"],["2411-4.3","P","K0247"],["2411-6.1","P","K0294,S0039"],["2411-6.2","P","S0039"],["2411-6.3","P","JL-04,K0088"],["2411-6.4","P","JL-31"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2601":[["2601-4.1","D","JL-31,S0067"],["2601-1.2","P","K0158,S0067"],["2601-2.2","P","JL-31"],["2601-2.3","P","JL-03,JL-31,K0088"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-5.2","D","S0060"],["2742-8.1","D","JL-13"],["2742-1.5","P","K0068"],["2742-1.1","I","K0068"]],"CIST 2613":[["2613-3.4","D","JL-13,S0060"],["2613-5.3","I","JL-09"],["2613-8.2","I","K0018"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2611":[["2611-6.1","I","K0247"]],"CIST 2452":[["2452-16.1","D","S0039"],["2452-1.1","P","JL-09"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"],["2614-5.3","P","K0018"],["2614-3.4","I","K0034"],["2614-4.1","I","K0005"],["2614-5.5","I","K0019"]]},"422":{"CIST 1001":[["1001-4.4","I","JL-42"],["1001-5.1","I","K0001"],["1001-5.4","I","K0001"]],"CIST 2451":[["2451-16.4","P","K0001"],["2451-1.5","I","K0001"],["2451-16.1","I","K0001"]],"CIST 1601":[["1601-2.1","I","K0004"],["1601-3.2","I","JL-44"],["1601-6.3","I","K0004"]],"CIST 2602":[["2602-1.2","I","K0004"]],"CIST 1122":[["1122-6.2","P","JL-01,JL-15"]],"CIST 2411":[["2411-1.2","P","K0060"]],"CIST 2431":[["2431-3.3","P","K0129"],["2431-5.3","P","K0129"],["2431-8.2","P","K0129"],["2431-8.3","P","K0129"],["2431-1.4","I","K0060"]],"CIST 2742":[["2742-2.2","D","S0060"],["2742-2.3","D","JL-42"],["2742-5.2","D","S0060"],["2742-7.2","D","JL-41"],["2742-8.1","D","JL-13,JL-41"],["2742-1.5","P","K0068"],["2742-5.3","P","JL-41"],["2742-1.1","I","K0068"]],"CIST 2613":[["2613-3.4","D","JL-13,S0060"]],"CIST 1602":[["1602-2.2","I","JL-44"],["1602-3.4","I","JL-16"]],"CIST 2612":[["2612-2.1","I","JL-16"]],"CIST 2640":[["2614-2.2","P","K0060"],["2614-2.5","P","K0060"]]}};
+const P = {
+"521":{title:"Security Tools Technician",sub:"Cyber Defense Infrastructure Support Specialist",tag:"flag",tagTxt:"Best coursework fit — 75%",
+ alias:"Firewall Administrator · IDS/IPS Technician · SIEM Administrator (jr) · Network Security Tech",
+ blurb:"You build and run the defensive machinery — firewalls, sensors, log pipelines — that the SOC depends on. CIST 2611 is nearly a job-description match for this role.",
+ stats:{pct:75.0,D:5,P:25,I:7,G:3,n:40},
+ sems:[
+  {u:[["CIST 1001","Networking & security vocabulary everything else builds on"],["ENGL 1101","Change tickets and build notes are professional writing"],["COLL 1060","Clearance-readiness advising touchpoint"]],m:{t:"Milestone 1",items:["Clearance self-assessment done","Home lab started (this becomes your perimeter later)"]}},
+  {u:[["CIST 2451","TCP/IP, subnetting, device hardening — how traffic really flows"],["CIST 2431","The command line your tools live on"],["CIST 2411","The endpoints behind your perimeter"],["CIST 1601","Threats, attacks, risk — the Security+ spine"]],m:{t:"Milestone 2",items:["Comfortable in Bash","Security+ prep started"]}},
+  {u:[["CIST 2452","L2 defense: port security, DHCP snooping, ARP inspection"],["CIST 2602","Firewall tech, IDS concepts, crypto, remote access <span class='ksa'>K0046 · K0018</span>"],["CIST 2601","Harden the boxes your tools run on <span class='ksa'>S0067</span>"]],m:{t:"Milestone 3",items:["Security+ exam passed","pfSense deployed at the home-lab perimeter"]}},
+  {u:[["CIST 2611","★ The engine: packet filters, app-layer firewalls, DMZ, TACACS+/RADIUS, IDS/IPS demonstrated <span class='ksa'>JL-33 · JL-34 · JL-35</span>"],["CIST 2613","Attack literacy — tune signatures against real attacker traffic"],["CIST 2742","Rule generation, config backups, pipeline scripts <span class='ksa'>S0060</span>"]],m:{t:"Milestone 4",items:["Suricata added; one custom rule written & tested","Firewall change ticket documented end-to-end"]}},
+  {u:[["CIST 2640","The analyst's view of your infrastructure: rules, alerts, logging"],["CIST 1602","Change control & config standards"],["CIST 2612","Evidence-grade logging discipline"]],m:{t:"Milestone 5 — Graduation",items:["Security Onion (or Wazuh) deployed & documented","Portfolio complete · applications out"]}}],
+ gaps:[["Virtualization (GAP)","Your appliances are VMs — the home hypervisor closes this automatically"],["Named-IDS tuning","One custom Suricata rule, tested and documented"],["SIEM pipeline admin","Security Onion end-to-end with agent enrollment"],["Appliance health monitoring","LibreNMS/Zabbix watching your security stack"]],
+ port:["Defensive lab diagram: pfSense + Suricata perimeter","One custom Suricata rule + triggering traffic","Firewall change-ticket write-up","Security Onion deployment doc + one investigated alert","Config-backup / rule-audit script","Security+ (CCNA a strong plus)"],
+ leads:["511","441","451"]},
+
+"451":{title:"Junior System Administrator",sub:"System Administrator",tag:"feed",tagTxt:"Tier 1 feeder — 68.8%",
+ alias:"IT Specialist (SYSADMIN) · Windows/Linux Admin I · Infrastructure Technician",
+ blurb:"Keep servers and endpoints healthy: accounts, patches, backups, baselines. The deepest coursework alignment of any feeder role — and a two-year springboard into every security pathway.",
+ stats:{pct:68.8,D:5,P:17,I:8,G:2,n:32},
+ sems:[
+  {u:[["CIST 1001","Hardware & OS vocabulary"],["ENGL 1101","Documentation is half the job"],["COLL 1060","Clearance advising touchpoint"]],m:{t:"Milestone 1",items:["Clearance self-assessment","Home lab started"]}},
+  {u:[["CIST 2411","Windows installation & configuration <span class='ksa'>K0060</span>"],["CIST 2431","Linux CLI fluency <span class='ksa'>K0129</span>"],["CIST 2451","Network context for every system you run"],["CIST 1601","Security worldview starts here"]],m:{t:"Milestone 2",items:["Comfortable in Bash & PowerShell basics","Security+ prep started"]}},
+  {u:[["CIST 2601","★ Server file/share/account security; secure multi-platform build <span class='ksa'>JL-31 · S0067</span>"],["CIST 2602","Auditing & logging on your systems"],["CIST 1122","Hardware truth under every server"],["CIST 2452","Where your servers sit on the network"]],m:{t:"Milestone 3",items:["Security+ exam passed","Hypervisor stood up at home (Proxmox/Hyper-V) — closes the virtualization gap"]}},
+  {u:[["CIST 2742","★ Bulk-operations scripting — 5 servers vs 500 <span class='ksa'>S0060 · JL-13</span>"],["CIST 2611","The security stack on your systems"],["CIST 2613","Why baselines matter"]],m:{t:"Milestone 4",items:["VM lifecycle exercise: build → snapshot → break → restore → verify","Bulk-account PowerShell/Bash script written"]}},
+  {u:[["CIST 1602","Change control & standards — how enterprises operate"],["CIST 2640","Logging vocabulary that pulls sysadmins into security work"],["CIST 2612","Documentation discipline"]],m:{t:"Milestone 5 — Graduation",items:["Self-built AD domain documented","Portfolio complete · apply (411 reqs at target employers too — internal transfer is a real path)"]}}],
+ gaps:[["Virtualization (GAP)","Home hypervisor + documented VM lifecycle"],["Server-OS at scale","Windows Server eval ISO: AD DS domain, GPO push, file services"],["A+/Security+ attainment","Exams after 1122/2411 and 2602"]],
+ port:["VM lifecycle + backup/restore verification doc","Bulk-operations script","Hardening checklist with before/after evidence","Self-built AD domain summary","Trouble-ticket write-up","Security+ certificate"],
+ leads:["461","612","511","521"]},
+
+"461":{title:"System Security Analyst",sub:"System Security Analyst",tag:"feed",tagTxt:"451 + security layer — 68.3%",
+ alias:"Information Systems Security Analyst · Secure Systems Admin · IT Specialist (INFOSEC/SYSADMIN)",
+ blurb:"Administer systems as security work: harden to a baseline, run and remediate your own scans, feed clean evidence to the ISSO. This pathway is the 451 road plus three additions — and it has the highest Demonstrated count in the database.",
+ stats:{pct:68.3,D:9,P:19,I:11,G:2,n:41},
+ sems:[
+  {u:[["CIST 1001","Systems & security vocabulary everything builds on"],["COLL 1060","Clearance-readiness advising touchpoint"],["ENGL 1101","Control statements are professional writing — treat it as technical"],["MATH 1111","Logic foundation for scripting and baselines"]],m:{t:"Milestone 1",items:["Clearance self-assessment done","Home lab started (this becomes the system you secure)"]}},
+  {u:[["CIST 1601","Risk & law foundations"],["CIST 2411","Endpoint control configuration: UAC, Defender, firewall <span class='ksa'>K0158</span>"],["CIST 2431","Linux CLI — verify settings during assessments <span class='ksa'>K0129</span>"],["CIST 2451","Network boundary & dataflow for system diagrams"]],m:{t:"Milestone 2",items:["Comfortable in Bash & PowerShell basics","Security+ prep started","Controls notebook begun: each lab security setting as a one-line implementation statement"]}},
+  {u:[["CIST 1122","Hardware truth under every server"],["CIST 2452","Where your systems sit on the network"],["CIST 2601","★ Secure multi-platform server build — the program's server capstone <span class='ksa'>2601-4 · D-level</span>"],["CIST 2602","Auditing, logging, scanning — the assessor's toolkit <span class='ksa'>K0054</span>"]],m:{t:"Milestone 3",items:["Security+ exam passed","STIG applied to one lab server — every build gets a baseline doc from now on"]}},
+  {u:[["CIST 2611","The security stack whose controls you own"],["CIST 2613","Scan & patch your own systems at D level <span class='ksa'>S0001 · K0070</span>"],["CIST 2742","Automate the remediation loop"]],m:{t:"Milestone 4",items:["Monthly Nessus scan of your own lab with a remediation log — findings driven to zero"]}},
+  {u:[["CIST 1602","NIST models & policy authorship — speak ISSO <span class='ksa'>K0048 · JL-11</span>"],["CIST 2612","Evidence & documentation discipline"],["CIST 2640","Monitoring & evidence context"]],m:{t:"Milestone 5 — Graduation",items:["One-page ISSO-ready system security summary written","Hardened-build package complete"]}}],
+ gaps:[["Virtualization (GAP)","Inherited from 451 — the home hypervisor"],["Baseline fluency","Full STIG check-fix-recheck on two platforms"],["Remediation as routine","Three months of scan cadence beats one heroic weekend"]],
+ port:["Hardened-build package (secure server build + STIG checklist, two platforms)","3-month scan & remediation log","ISSO-ready system security summary","Everything from the 451 portfolio","Security+ certificate"],
+ leads:["612","521","541"]},
+
+"212":{title:"Digital Forensics Technician",sub:"Cyber Defense Forensics Analyst",tag:"",tagTxt:"Specialization — 67.6%",
+ alias:"Forensic Examiner (jr) · Evidence Technician · DFIR Analyst · eDiscovery Tech",
+ blurb:"Recover and document digital evidence so it holds up — to an incident commander or a courtroom. Smallest regional pipeline of the mapped roles: treat this as a specialization stacked on the SOC/IR track, with CIST 2612 as its star course.",
+ stats:{pct:67.6,D:4,P:19,I:10,G:1,n:34},
+ sems:[
+  {u:[["CIST 1001","Systems & storage-media vocabulary <span class='ksa'>K0117</span>"],["COLL 1060","Background scrutiny is doubled in this field — advising matters twice"],["ENGL 1101","Defensible reports are the deliverable"],["MATH 1111","Logic foundation for scripting"]],m:{t:"Milestone 1",items:["Clearance/background self-assessment","Home lab started"]}},
+  {u:[["CIST 1601","Threats, attacks & the legal frame"],["CIST 2411","Windows artifacts: where evidence lives"],["CIST 2431","★ File-system hierarchy — your first forensic concept <span class='ksa'>K0117</span>"],["CIST 2451","How traffic flows — network evidence context"]],m:{t:"Milestone 2",items:["Bash fluency","Security+ prep started"]}},
+  {u:[["CIST 1122","Physical media handling & professionalism"],["CIST 2452","Network context for network-borne evidence"],["CIST 2601","How systems are secured — and what that leaves behind"],["CIST 2602","Hashing & crypto awareness — the verification half of imaging"]],m:{t:"Milestone 3",items:["Security+ exam passed"]}},
+  {u:[["CIST 2611","Defensive tooling that generates the logs you'll examine"],["CIST 2613","Attacker TTPs — what your timelines reconstruct <span class='ksa'>K0110</span>"],["CIST 2742","Parse artifacts at scale <span class='ksa'>S0060</span>"]],m:{t:"Milestone 4",items:["FTK Imager + Autopsy bench set up","First acquisition: image a lab disk, verify hash, recover 3 deleted files"]}},
+  {u:[["CIST 1602","The policy & legal frame investigations operate inside"],["CIST 2612","★ The star course: legal collection & analysis, chain of custody, artifact retrieval at D level <span class='ksa'>K0118 · S0047 · S0071</span>"],["CIST 2640","Hashing methods; forensics in the incident context"]],m:{t:"Milestone 5 — Graduation",items:["Full mock examination: acquire → analyze → report → 10-min mock briefing","Portfolio complete"]}}],
+ gaps:[["Imaging reps","FTK Imager acquisitions in E01 + raw, with acquisition forms"],["Live response","2612 is dead-box; build a native-tool live-response SOP"],["Malware triage","10 documented sandbox-report verdicts"],["Presentation","Mock findings briefing to the club — the rep nobody else has"]],
+ port:["Mock examination case file (acquisition → timeline → report → briefing deck)","3 practice-case write-ups (CyberDefenders)","Chain-of-custody & acquisition SOP","Artifact-parsing Python script","Security+ certificate"],
+ leads:["531","511"]},
+
+"441":{title:"NOC / Network Technician",sub:"Network Operations Specialist",tag:"feed",tagTxt:"Tier 1 feeder — 64.3%",
+ alias:"NOC Technician · Junior Network Administrator · Network Support Specialist",
+ blurb:"Keep the network up: watch availability, work link-down tickets, configure switch ports and VLANs. The Cisco sequence (2451→2452) maps almost one-to-one onto the daily work — and this is the only role where troubleshooting itself is the Demonstrated-level evidence.",
+ stats:{pct:64.3,D:5,P:13,I:8,G:2,n:28},
+ sems:[
+  {u:[["CIST 1001","Network & hardware vocabulary"],["COLL 1060","Clearance advising touchpoint"]],m:{t:"Milestone 1",items:["Clearance self-assessment","Home lab started"]}},
+  {u:[["CIST 2451","★ TCP/IP, subnetting, cabling, device config <span class='ksa'>K0061 · JL-30</span>"],["CIST 2431","CLI for network boxes"],["CIST 1601","Security context NOCs increasingly require"]],m:{t:"Milestone 2",items:["Subnet without a calculator","Cert prep started (Net+/CCNA track)"]}},
+  {u:[["CIST 2452","★ VLANs, trunking, inter-VLAN & route troubleshooting at D level <span class='ksa'>JL-27 · S0039</span>"],["CIST 1122","Physical layer: racking, cabling"],["CIST 2602","The security boundary you operate against"]],m:{t:"Milestone 3",items:["CCNA exam — strike while 2451/2452 are fresh","(Security+ too if targeting cleared billets)"]}},
+  {u:[["CIST 2742","Config-generation and log-parsing scripts"],["CIST 2611","Firewall placement — the NOC/security boundary"]],m:{t:"Milestone 4",items:["LibreNMS or Zabbix monitoring your lab via SNMP/syslog","One fault-to-resolution ticket documented"]}},
+  {u:[["CIST 1602","Change control — how real networks are run"],["CIST 2640","The logging vocabulary that pulls NOC techs into security"]],m:{t:"Milestone 5 — Graduation",items:["Portfolio complete","Apply — and to 411 reqs at target employers too"]}}],
+ gaps:[["SNMP/monitoring","LibreNMS/Zabbix home stack with an alert-to-resolution write-up"],["CCNA attainment","Exam immediately after 2452"],["Shift teamwork","NCAE / timed team CTFs"]],
+ port:["Monitoring-stack screenshots + alert narrative","VLAN troubleshooting lab write-up","Trouble-ticket write-up","CCNA (+ Security+ for cleared work)"],
+ leads:["521","511","451"]},
+
+"422":{title:"Data Analyst (security-adjacent)",sub:"Data Analyst",tag:"cond",tagTxt:"Conditional — read the caution",
+ alias:"Reporting Analyst · Metrics Analyst · SOC Reporting Analyst · GRC Reporting Analyst",
+ blurb:"Collect, clean, and analyze data; build the reports people actually read. Offered conditionally: viable only if you build the SQL + BI + statistics stack yourself — then target the security-data hybrid where your cyber coursework becomes the differentiator.",
+ caution:"<b>The 62.5% score misleads.</b> The gaps — SQL, statistics, BI dashboards — are the core of this job. Coursework gives you the Python substrate; the analyst toolkit is entirely on you. Not started on the stack by semester 5? Choose the 511 or 451 pathway instead.",
+ stats:{pct:62.5,D:4,P:6,I:3,G:3,n:16},
+ sems:[
+  {u:[["CIST 1001","Software & systems vocabulary"],["ENGL 1101","Analysis write-ups are professional writing"]],m:{t:"Milestone 1",items:["Clearance self-assessment (federal data seats)"]}},
+  {u:[["CIST 2431","CLI data wrangling begins"],["CIST 1601","Data privacy & ethics context <span class='ksa'>JL-44</span>"]],m:{t:"Milestone 2",items:["Excel pivot fluency (self-study starts now)"]}},
+  {u:[["CIST 2602","Where security data comes from"],["CIST 1122","Professional communication"]],m:{t:"Milestone 3",items:["SQLBolt complete; SQLite installed on real data","(Security+ if targeting cleared seats — a free bonus of this program)"]}},
+  {u:[["CIST 2742","★ Data cleaning, extraction, programmatic output at D level <span class='ksa'>JL-41 · S0060</span>"],["CIST 2613","The security events your dashboards will count"]],m:{t:"Milestone 4",items:["10 documented SQL queries (joins + aggregation)","Power BI Desktop installed; first report built"]}},
+  {u:[["CIST 1602","Data handling, classification, compliance framing"],["CIST 2640","SOC metrics vocabulary: alerts, tickets, findings"]],m:{t:"Milestone 5 — Graduation",items:["★ SOC-metrics dashboard from your own home-lab logs","Statistics write-up for a non-technical reader"]}}],
+ gaps:[["SQL (GAP)","SQLBolt → SQLite → practice sets; 10 commented queries"],["Statistics (GAP)","Khan/OpenStax — MATH 1111 is algebra, not statistics"],["BI dashboards","Power BI Desktop (free); one live-refreshing dashboard"]],
+ port:["SOC-metrics dashboard from home-lab logs (the centerpiece)","SQL query portfolio","Statistical analysis write-up","Python data-cleaning script","Data-handling/PII one-pager"],
+ leads:["511","612"]},
+
+"541":{title:"Vulnerability Analyst",sub:"Vulnerability Assessment Analyst",tag:"",tagTxt:"Scan & report — 61.1%",
+ alias:"Scan Technician · ACAS Operator · Patch/Remediation Tech · IA Analyst (entry)",
+ blurb:"Run authorized scans, find weaknesses, and turn raw findings into prioritized remediation reports. On DoW contracts this is the ACAS/STIG world — methodical, checklist-driven, and genuinely open to new grads.",
+ stats:{pct:61.1,D:5,P:17,I:12,G:2,n:36},
+ sems:[
+  {u:[["CIST 1001","Vocabulary"],["ENGL 1101","★ The report is the deliverable — take this seriously"],["COLL 1060","Clearance advising"]],m:{t:"Milestone 1",items:["Clearance self-assessment","Home lab with 2–3 VMs (you'll scan these)"]}},
+  {u:[["CIST 1601","Threats, attacks, risk concepts <span class='ksa'>K0106</span>"],["CIST 2411","The Windows endpoints you'll scan"],["CIST 2431","The CLI scanners live on <span class='ksa'>K0129</span>"],["CIST 2451","What a port actually is"]],m:{t:"Milestone 2",items:["Bash comfort","Security+ prep started"]}},
+  {u:[["CIST 2452","Device baselines & security best practices <span class='ksa'>JL-09</span>"],["CIST 2601","Hardening = the remediation side of every finding"],["CIST 2602","Auditing, logging, scanning labs <span class='ksa'>S0041</span>"]],m:{t:"Milestone 3",items:["Security+ passed","Nessus Essentials installed; first credentialed scan of your own VMs"]}},
+  {u:[["CIST 2613","★ The core course: scanning, patching, web-app attacks at D level <span class='ksa'>S0001 · S0137</span>"],["CIST 2742","Parse scanner output into findings summaries <span class='ksa'>JL-13</span>"],["CIST 2611","The defensive context your findings land in"]],m:{t:"Milestone 4",items:["★ CVSS-scored remediation report from a home-lab scan","STIG check-fix-recheck cycle documented"]}},
+  {u:[["CIST 1602","NIST models & RMF vocabulary — the ISSO bridge <span class='ksa'>K0048</span>"],["CIST 2640","Vulnerability information sources <span class='ksa'>JL-20</span>"],["CIST 2612","Evidence-grade documentation"]],m:{t:"Milestone 5 — Graduation",items:["POA&M-format tracking spreadsheet from your own findings","Portfolio complete"]}}],
+ gaps:[["Named scanner","Nessus Essentials scheduled scans, screenshot-documented"],["STIG/SCAP","DISA STIG Viewer + SCC full cycle on lab VMs"],["CVSS reporting","One formal report, instructor-reviewed"],["eMASS/POA&M (GAP)","No public sandbox exists — POA&M spreadsheet + interview-ready vocabulary"]],
+ port:["CVSS-scored remediation report (centerpiece)","STIG compliance write-up: baseline → fix → clean re-scan","Scanner-output parser script","POA&M tracker","Security+ certificate"],
+ leads:["612","511","521"]},
+
+"531":{title:"Incident Responder",sub:"Cyber Defense Incident Responder",tag:"",tagTxt:"The natural second job — 60.9%",
+ alias:"CSIRT Analyst I · Cyber Incident Analyst · DFIR Analyst (jr) · SOC Tier 2",
+ blurb:"When monitoring confirms something real, you take over: scope it, contain it, collect the evidence, write the after-action report. Most often reached after 12–24 months in a 511 SOC seat — and the entry sets overlap so completely that pursuing 511 keeps this door open for free.",
+ stats:{pct:60.9,D:3,P:25,I:16,G:2,n:46},
+ sems:[
+  {u:[["CIST 1001","Networking & security vocabulary everything builds on"],["COLL 1060","Clearance-readiness advising touchpoint"],["ENGL 1101","After-action reports are a daily deliverable"],["MATH 1111","Logic foundation for scripting"]],m:{t:"Milestone 1",items:["Clearance self-assessment done","Home lab started · joined the cyber club"]}},
+  {u:[["CIST 1601","Threats, attacks, risk — the Security+ spine"],["CIST 2411","The Windows endpoint you'll investigate <span class='ksa'>K0060</span>"],["CIST 2431","The command line evidence tools live on <span class='ksa'>K0129</span>"],["CIST 2451","How traffic flows — what your timelines reconstruct <span class='ksa'>K0061</span>"]],m:{t:"Milestone 2",items:["Comfortable in Bash","Security+ prep begins"]}},
+  {u:[["CIST 1122","Physical layer & professionalism"],["CIST 2452","LAN attack surface you'll trace"],["CIST 2601","What a secure baseline means — and what a breach disturbs"],["CIST 2602","Detection & monitoring foundations <span class='ksa'>K0046</span>"]],m:{t:"Milestone 3",items:["Security+ exam passed","First CTF event"]}},
+  {u:[["CIST 2611","Detection tech you'll pivot from during response <span class='ksa'>S0025</span>"],["CIST 2613","★ Attacker TTPs — responders reconstruct what attackers did <span class='ksa'>K0110</span>"],["CIST 2742","Artifact-parsing & timeline scripts"]],m:{t:"Milestone 4",items:["800-61 lifecycle mapped onto one 2613 lab attack","5 hashes triaged through VirusTotal; 2 sandbox reports read"]}},
+  {u:[["CIST 1602","IR plan contents & reporting obligations"],["CIST 2612","★ Evidence collection, chain of custody, forensic tools at D level <span class='ksa'>K0118 · S0071</span>"],["CIST 2640","★ IR handling performed; Kill Chain & Diamond Model <span class='ksa'>K0042 · K0177</span>"]],m:{t:"Milestone 5 — Graduation",items:["★ One incident worked end-to-end in the lab: attack → detect → collect → contain → 800-61 report","Portfolio complete"]}}],
+ gaps:[["Malware triage","10 documented verdicts from VirusTotal/ANY.RUN reports"],["Live response","Native-tool SOP: wevtutil/autoruns · journalctl/ps"],["800-61 fluency","Read SP 800-61; run one club tabletop"],["SIEM + packets","Inherited from 511: Splunk BOTS + PCAP write-ups"]],
+ port:["End-to-end incident write-up (centerpiece)","Live-response collection SOP","Malware triage log (10 verdicts)","Timeline-building script","2 forensic lab write-ups","Security+ certificate"],
+ leads:["511","212","521"]},
+
+"511":{title:"SOC Analyst (Tier 1)",sub:"Cyber Defense Analyst",tag:"flag",tagTxt:"Flagship — heaviest regional demand",
+ alias:"Cyber Defense Analyst · Security Monitoring Analyst · Cybersecurity Analyst (entry)",
+ blurb:"First set of eyes in a Security Operations Center: triage the alert, investigate, document, escalate. The heaviest-hiring security role around Fort Eisenhower and NSA-Georgia contractor SOCs.",
+ stats:{pct:59.5,D:4,P:21,I:15,G:2,n:42},
+ sems:[
+  {u:[["CIST 1001","Networking & security vocabulary <span class='ksa'>K0001</span>"],["ENGL 1101","Incident write-ups are a daily deliverable"],["COLL 1060","Clearance advising touchpoint"]],m:{t:"Milestone 1",items:["Clearance self-assessment","Home lab started · joined the cyber club"]}},
+  {u:[["CIST 1601","★ Threats, attacks, risk, law — the Security+ spine <span class='ksa'>K0002–K0006</span>"],["CIST 2411","The endpoint you'll defend <span class='ksa'>K0060</span>"],["CIST 2431","The command line SOC tools live on <span class='ksa'>K0129</span>"],["CIST 2451","How traffic actually flows <span class='ksa'>K0061</span>"]],m:{t:"Milestone 2",items:["Subnet without a calculator · comfortable in Bash","Security+ prep begins"]}},
+  {u:[["CIST 2602","IDS concepts, crypto, auditing/logging/scanning <span class='ksa'>K0046 · A0128</span>"],["CIST 2601","What a secure baseline means"],["CIST 2452","The LAN attack surface"],["CIST 1122","Workplace professionalism"]],m:{t:"Milestone 3",items:["★ Security+ exam passed","First CTF event"]}},
+  {u:[["CIST 2613","★ The attacker's playbook — you can't triage what you can't recognize <span class='ksa'>K0110</span>"],["CIST 2611","Firewalls & IDS/IPS hands-on <span class='ksa'>S0025</span>"],["CIST 2742","Scripting — the #1 Tier-1 differentiator <span class='ksa'>S0060</span>"]],m:{t:"Milestone 4",items:["GitHub live with 3+ scripts","Splunk Fundamentals or TryHackMe SOC path started"]}},
+  {u:[["CIST 2640","★ The SOC capstone: workflow, logging, rules & alerts, Kill Chain, incident handling <span class='ksa'>JL-06 · K0177</span>"],["CIST 2612","Evidence & documentation discipline"],["CIST 1602","Policy authorship at D level"]],m:{t:"Milestone 5 — Graduation",items:["Portfolio complete: incident reports + SIEM write-up + scripts + CTF record","Resume states 'DCWF 511-aligned' · applications out"]}}],
+ gaps:[["Named SIEM","Splunk Fundamentals (free) · TryHackMe SOC L1 · Boss of the SOC"],["Packet analysis depth","Malware-Traffic-Analysis.net: 3 PCAP write-ups"],["ATT&CK framing","Free MITRE badge; re-frame one 2613 lab in ATT&CK terms"],["Shift teamwork","NCAE Cyber Games / timed team CTFs"]],
+ port:["2 incident-report writing samples","SIEM investigation write-up","Scripts repo (log parser, scan reporter)","3 PCAP analyses","CTF participation record","Security+ certificate","Home-lab diagram"],
+ leads:["531","521","541"]},
+
+"411":{title:"Help Desk / IT Support",sub:"Technical Support Specialist",tag:"feed",tagTxt:"The classic first job — 58.1%",
+ alias:"Service Desk Analyst · Desktop Support · Field Service Tech · Imaging Tech",
+ blurb:"The most-hired first job in IT, and the honest on-ramp: contractors, hospitals, and school districts hire on A+ fundamentals plus reliability, and internal transfer into security or infrastructure within a year is a well-worn regional path.",
+ stats:{pct:58.1,D:4,P:14,I:10,G:3,n:31},
+ sems:[
+  {u:[["CIST 1001","Hardware, software, and user vocabulary <span class='ksa'>K0109</span>"],["ENGL 1101","Ticket notes are professional writing"],["COLL 1060","Clearance advising (cleared help desk pays more)"]],m:{t:"Milestone 1",items:["Clearance self-assessment","Home lab started"]}},
+  {u:[["CIST 2411","★ Windows install, config, troubleshooting <span class='ksa'>K0060 · S0039</span>"],["CIST 2431","Linux basics widen your reqs"],["CIST 2451","Enough networking to triage 'is it the network?'"],["CIST 1601","Security awareness employers expect"]],m:{t:"Milestone 2",items:["Confident Windows rebuild from bare metal","A+ prep started"]}},
+  {u:[["CIST 1122","★ Hardware install & maintenance at D level; professionalism <span class='ksa'>K0294 · JL-15</span>"],["CIST 2601","Workstation security: logins, AV, hardening <span class='ksa'>K0158</span>"],["CIST 2602","Remote access security <span class='ksa'>K0247</span>"]],m:{t:"Milestone 3",items:["★ A+ exam passed (Security+ too for cleared billets)"]}},
+  {u:[["CIST 2742","Scripting sets you apart at the service desk"],["CIST 2611","Remote access & firewall context"]],m:{t:"Milestone 4",items:["ITSM sandbox (osTicket): 10 lab 'incidents' worked through a real queue","One polished ticket write-up: symptom → diagnosis → fix → verify"]}},
+  {u:[["CIST 1602","AUPs and the policies you'll enforce"],["CIST 2640","The escalation path — where your tickets go"]],m:{t:"Milestone 5 — Graduation",items:["Portfolio complete","Apply broadly — this role is about reps and reliability"]}}],
+ gaps:[["Ticketing practice (GAP)","Free osTicket/ServiceNow-dev sandbox — the daily 411 task"],["AD/GPO basics","Server eval ISO self-study"],["A+ attainment","Exam after 1122/2411"]],
+ port:["Ticket write-up portfolio (3 polished examples)","Imaging/deployment checklist","Home-lab build notes","A+ certificate (Security+ for cleared work)"],
+ leads:["451","441","511"]},
+
+"612":{title:"Junior ISSO / RMF Analyst",sub:"Security Control Assessor support · ISSM track",tag:"",tagTxt:"Most clearance-friendly — 50%",
+ alias:"Information Assurance Analyst · RMF Analyst · Compliance Analyst · eMASS Analyst",
+ blurb:"Keep systems authorized to operate: control statements, POA&Ms, scan-finding tracking, continuous-monitoring evidence. Documents and process, not packets — and the most clearance-friendly security-titled entry work in the CSRA. The 50% score is honest: coursework gives you the vocabulary; the RMF workflow is built extracurricularly.",
+ caution:"<b>Lowest coursework coverage of any role (50%).</b> That's the finding, not a flaw — the RMF core (A&A process, 800-53 language, eMASS) sits at Introduced or GAP. The mock RMF package below carries more interview weight here than in any other pathway.",
+ stats:{pct:50.0,D:3,P:11,I:12,G:2,n:28},
+ sems:[
+  {u:[["CIST 1001","Systems vocabulary"],["ENGL 1101","★ Treat as a core technical course — this job is professional writing"],["COLL 1060","Clearance advising (decisive for this pathway)"]],m:{t:"Milestone 1",items:["Clearance self-assessment","Home lab started (it becomes your mock 'system')"]}},
+  {u:[["CIST 1601","Risk, threats, laws & legal bodies <span class='ksa'>K0168</span>"],["CIST 2411","Control implementation in miniature: UAC, Defender, firewall <span class='ksa'>K0158</span>"],["CIST 2451","Boundary & dataflow for system diagrams"]],m:{t:"Milestone 2",items:["Security+ prep started","Controls notebook: every lab security setting as a one-line implementation statement"]}},
+  {u:[["CIST 2602","★ Auditing, logging, scanning — the assessor's toolkit <span class='ksa'>K0054 · S0001</span>"],["CIST 2601","Hardening = control implementation"],["CIST 2452","Device baselines"]],m:{t:"Milestone 3",items:["Security+ passed (structural for ISSO billets)","STIG Viewer + SCC run; 5 findings in finding/fix format"]}},
+  {u:[["CIST 2613","Understand the findings you'll validate <span class='ksa'>K0070</span>"],["CIST 2742","Automate evidence collection; scanner-output → POA&M rows"],["CIST 2611","The security stack whose controls you document"]],m:{t:"Milestone 4",items:["★ Mock RMF package begun: boundary diagram + 10 control statements (AC/AU/CM) + scan results + POA&M tracker"]}},
+  {u:[["CIST 1602","★ The star course: NIST models, security lifecycle, authored policy at D level <span class='ksa'>K0048 · JL-11 · JL-22</span>"],["CIST 2640","Logging & evidence for ConMon <span class='ksa'>JL-23</span>"],["CIST 2612","Evidence handling discipline"]],m:{t:"Milestone 5 — Graduation",items:["Mock RMF package complete & instructor-reviewed","Portfolio out with policy + package as writing samples"]}}],
+ gaps:[["RMF workflow","Guided SP 800-37/800-53 reading mapped to your mock package"],["800-53 language","10 implementation statements for your own lab"],["eMASS/POA&M (GAP)","No public sandbox — POA&M spreadsheet + honest interview line: 'standard format, not yet eMASS access'"],["ConMon evidence","Recurring lab scans archived as an evidence trail"]],
+ port:["Mock RMF package (centerpiece)","Authored security policy (CIST 1602)","STIG assessment write-up","3-month evidence trail + ConMon summary","Scanner-to-POA&M script","Security+ certificate"],
+ leads:["461","541","521"]}
+};
+const ORDER = ["521","451","461","212","441","422","541","531","511","411","612"];
+
+/* ============ persistence (artifact storage with silent in-memory fallback) ============ */
+let progress = {};
+async function loadProgress(){
+  try{ if(window.storage){ const r = await window.storage.get('is23-pathway-progress'); if(r&&r.value) progress = JSON.parse(r.value); } }catch(e){}
+  render();
+}
+let saveT=null;
+function saveProgress(){
+  clearTimeout(saveT);
+  saveT=setTimeout(async()=>{ try{ if(window.storage) await window.storage.set('is23-pathway-progress', JSON.stringify(progress)); }catch(e){} },400);
+}
+function pget(code){ if(!progress[code]) progress[code]={sem:1,checks:{},open:{}}; if(!progress[code].open) progress[code].open={}; return progress[code]; }
+
+/* ============ views ============ */
+const homeEl=document.getElementById('home'), detailEl=document.getElementById('detail'),
+      backBtn=document.getElementById('backBtn'), body=document.getElementById('detailBody');
+let current=null;
+
+function bar(s){
+  const t=s.D+s.P+s.I+s.G;
+  return `<div class="bar" role="img" aria-label="${s.D} demonstrated, ${s.P} practiced, ${s.I} introduced, ${s.G} gaps">
+    <i class="bD" style="width:${s.D/t*100}%"></i><i class="bP" style="width:${s.P/t*100}%"></i>
+    <i class="bI" style="width:${s.I/t*100}%"></i><i class="bG" style="width:${s.G/t*100}%"></i></div>`;
+}
+function renderHome(){
+  document.getElementById('cardGrid').innerHTML = ORDER.map(code=>{
+    const p=P[code];
+    return `<button class="card" onclick="openRole('${code}')" aria-label="Open ${p.title} pathway">
+      <div class="top"><span class="billet">${code}</span>
+        <div><h3>${p.title}</h3><div class="alias">${p.sub}</div></div></div>
+      <div class="alias">${p.alias}</div>
+      <div class="tagrow">${p.tag?`<span class="tag ${p.tag}">${p.tagTxt}</span>`:`<span class="tag">${p.tagTxt}</span>`}</div>
+      <div class="covrow"><div class="nums"><span>coursework coverage</span><b>${p.stats.pct.toFixed(1)}%</b></div>${bar(p.stats)}</div>
+    </button>`;
+  }).join('');
+}
+function openRole(code){
+  current=code;
+  homeEl.style.display='none'; detailEl.style.display='block'; backBtn.style.display='inline-block';
+  window.scrollTo(0,0); renderDetail();
+}
+function goHome(){ current=null; detailEl.style.display='none'; homeEl.style.display='block'; backBtn.style.display='none'; window.scrollTo(0,0); }
+
+function renderDetail(){
+  const p=P[current], st=pget(current), s=p.stats;
+  const rail = S_NAMES.map((n,i)=>{
+    const idx=i+1, cls = idx<st.sem?'done':(idx===st.sem?'here':'');
+    return `<button class="rstop ${cls}" onclick="setSem(${idx})" aria-label="I'm in ${n}">
+      <span class="youare">${idx===st.sem?'YOU ARE HERE':''}</span>
+      <span class="rdot">${idx<st.sem?'✓':idx}</span><span class="rlab">${n}</span></button>`;
+  }).join('');
+  const sems = p.sems.map((sm,i)=>{
+    const idx=i+1, cls = idx<st.sem?'past':(idx===st.sem?'current':'');
+    const unlocks = sm.u.map(([c,t],ci)=>{
+      const mapped = (OUTMAP[current]&&OUTMAP[current][c])?OUTMAP[current][c]:null;
+      let outBlock='';
+      if(mapped&&mapped.length){
+        const okey=`o_${idx}_${ci}`, open=!!st.open[okey];
+        const items=mapped.map(([oid,rt,ks])=>{
+          const stmt=OUTSTMT[oid]||oid;
+          return `<div class="outc"><span class="rt r${rt}">${rt}</span><span class="ot">${stmt}<span class="oid">${oid} · ${ks}</span></span></div>`;
+        }).join('');
+        const n=mapped.length;
+        outBlock=`<button class="outc-tog ${open?'open':''}" onclick="toggleOut('${okey}')" aria-expanded="${open}">`
+          +`<span class="car">▸</span>${n} mapped learning outcome${n>1?'s':''}</button>`
+          +(open?`<div class="outc-list">${items}</div>`:'');
+      }
+      return `<div class="unlock"><span class="c">${c}</span><span class="u">${t}${outBlock}</span></div>`;
+    }).join('');
+    const items = (sm.m.items||[]).map((it,j)=>{
+      const key=`m${idx}_${j}`, ck=!!st.checks[key];
+      return `<label class="check ${ck?'donetxt':''}"><input type="checkbox" ${ck?'checked':''} onchange="tick('${key}',this.checked)"><span>${it}</span></label>`;
+    }).join('');
+    return `<section class="sem ${cls}">
+      <div class="semhd"><span class="n">${String(idx).padStart(2,'0')}</span><span class="t">${S_NAMES[i]}</span>${idx===st.sem?'<span class="now">CURRENT</span>':''}</div>
+      <div class="unlocks">${unlocks}</div>
+      ${items?`<div class="milest"><div class="mh">⚑ ${sm.m.t}</div>${items}</div>`:''}
+    </section>`;
+  }).join('');
+  const gaps = p.gaps.map(([g,f])=>`<div class="gap"><span class="g">${g}</span><span class="f">${f}</span></div>`).join('');
+  const port = p.port.map((it,j)=>{
+    const key=`p_${j}`, ck=!!st.checks[key];
+    return `<label class="check ${ck?'donetxt':''}"><input type="checkbox" ${ck?'checked':''} onchange="tick('${key}',this.checked)"><span>${it}</span></label>`;
+  }).join('');
+  const leads = p.leads.map(c=>`<button class="lead" onclick="openRole('${c}')"><span class="bc">${c}</span><span>${P[c].title}</span></button>`).join('');
+
+  body.innerHTML = `
+   <div class="dhead">
+     <div class="row1"><span class="billet big">${current}</span>
+       <div><h2 class="disp">${p.title}</h2><div class="mono" style="font-size:12px;color:var(--dim);letter-spacing:.06em">DCWF · ${p.sub.toUpperCase()}</div></div></div>
+     <div class="alias">Real listing titles: ${p.alias}</div>
+     <p class="blurb">${p.blurb}</p>
+     ${p.caution?`<div class="caution">${p.caution}</div>`:''}
+     <div class="statstrip">
+       <div class="stat vPct"><div class="v">${s.pct.toFixed(1)}%</div><div class="k">coursework P/D</div></div>
+       <div class="stat vD"><div class="v">${s.D}</div><div class="k">demonstrated</div></div>
+       <div class="stat vP"><div class="v">${s.P}</div><div class="k">practiced</div></div>
+       <div class="stat vI"><div class="v">${s.I}</div><div class="k">introduced</div></div>
+       <div class="stat vG"><div class="v">${s.G}</div><div class="k">gaps</div></div>
+       <div class="stat"><div class="v">${s.n}</div><div class="k">entry KSAs</div></div>
+     </div>
+   </div>
+   <div class="railsec"><div class="ask">Where are you right now? Tap a semester.</div><div class="rail">${rail}</div></div>
+   ${sems}
+   <div class="sect"><h3>Gap plan — what coursework alone won't give you</h3><div class="gaps">${gaps}</div></div>
+   <div class="sect"><h3>Portfolio checklist — the evidence your resume points to</h3><div class="port">${port}</div></div>
+   <div class="sect"><h3>Where this job leads</h3><div class="leads">${leads}</div></div>
+   <div class="foot">Data: IS23 Career Pathways Mapping Database v2.0 · DoW Cyber Workforce Framework (DCWF) &amp; NICE Framework · Coverage figures are first-pass, pending two-rater review.
+     <div class="savenote">Your semester and checkmarks save automatically on this device.</div></div>`;
+}
+function setSem(n){ pget(current).sem=n; saveProgress(); renderDetail(); }
+function tick(key,val){ const st=pget(current); if(val) st.checks[key]=true; else delete st.checks[key]; saveProgress(); renderDetail(); }
+function toggleOut(key){ const st=pget(current); if(st.open[key]) delete st.open[key]; else st.open[key]=true; renderDetail(); }
+function render(){ renderHome(); if(current) renderDetail(); }
+
+render();
+loadProgress();
+</script>
+</body>
+</html>
